@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>My Bookings</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css"
+	th:href="@{/css/profile.css}">
+
+</head>
+<body>
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+
+
+
+		<div class="card-body">
+		
+			<div th:switch="${bookings.size()}">
+				<div class="col-md-10">
+					<div th:case="0">
+						<p class="display-2">No Bookings found :(( , why don't you
+							book some?</p>
+					</div>
+
+					<div th:case="*">
+						<p class="display-4">Check your Bookings</p>
+						<br>
+						<div class="row">
+							<div class="col-md-3 legend-items">
+								<svg class="bi bi-square-fill" width="1.6em" height="1.6em"
+									viewBox="0 0 16 16" fill="rgb(50,205,50)"
+									xmlns="http://www.w3.org/2000/svg">
+		  							<rect width="16" height="16" rx="2" />
+								</svg>
+								<p class="legend-text">current</p>
+							</div>
+							<div class="col-md-3 legend-items">
+								<svg class="bi bi-square-fill" width="1.6em" height="1.6em"
+									viewBox="0 0 16 16" fill="rgb(30,144,255)"
+									xmlns="http://www.w3.org/2000/svg">
+		  							<rect width="16" height="16" rx="2" />
+								</svg>
+								<p class="legend-text">upcoming</p>
+							</div>
+							<div class="col-md-3 legend-items">
+								<svg class="bi bi-square-fill" width="1.6em" height="1.6em"
+									viewBox="0 0 16 16" fill="rgb(220,20,60)"
+									xmlns="http://www.w3.org/2000/svg">
+		  							<rect width="16" height="16" rx="2" />
+								</svg>
+								<p class="legend-text">expired</p>
+							</div>
+						</div>
+						<div class="card-body" th:each="booking,iter : ${bookings}">
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th style="width: 16.66%">Country</th>
+										<th style="width: 16.66%">City</th>
+										<th style="width: 16.66%">Hotel</th>
+										<th style="width: 16.66%">Date From</th>
+										<th style="width: 16.66%">Date To</th>
+										<th style="width: 16.66%"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td th:class=${booking.returnStatus()}
+											th:text="${booking.destination.country}"></td>
+										<td th:class=${booking.returnStatus()}
+											th:text="${booking.destination.city}"></td>
+										<td th:class=${booking.returnStatus()}
+											th:text="${booking.hotel.name}"></td>
+										<td th:class=${booking.returnStatus()}
+											th:text="${booking.dateFrom}"></td>
+										<td th:class=${booking.returnStatus()}
+											th:text="${booking.dateTo}"></td>
+										<td th:class="${booking.returnStatus()}"><a
+											th:href="@{/user/displayBooking/{id}(id=${booking.bookingId})}"
+											th:class="${booking.returnStatus()}+' btn btn-primary'"> More Details<i class="fa fa-address-book ml-2"></i>
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<p class="expandButtons">
+								<a class="btn btn-primary" data-toggle="collapse"
+									th:href="'#bookingDescription'+${iter.index}" role="button"
+									aria-expanded="false"
+									th:aria-controls="'bookingDescription'+${iter.index}"> Keep
+									it short</a>
+							</p>
+
+							<div class="collapse" th:id="'bookingDescription'+${iter.index}">
+								<div class="card card-body">
+									<div class="card-deck">
+										<div class="card">
+											<img width="100%" height="400"
+												th:src="'../'+${'img/locationPictures/'+booking.destination.city +'.png'}">
+											<div class="card-body">
+												<h5 class="card-title">City Description</h5>
+												<p class="card-text">[[${booking.destination.description}]]</p>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div id="popup" th:value="${showMessage}"></div>
+
+
+
+	<script type="text/javascript" src="static/js/sidebar.js"
+		th:src="@{/js/sidebar.js}"></script>
+	<script>
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top-end',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			})
+			const element = document.getElementById("popup");
+		console.log(element.attributes[1].value);
+		if(element.attributes[1].value == "true"){
+			window.onload =  Toast.fire({
+				  icon: 'success',
+				  title: 'Booking added successfully'
+				})
+		}
+			</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css"
+	th:href="@{/css/profile.css}">
+
+<body>
+	<header th:fragment="sidenav">
+		<!-- Vertical navbar -->
+		<div class="vertical-nav bg-dark" id="sidebar">
+			<div class="py-4 px-3 mb-4 bg-dark">
+				<div class="media d-flex align-items-center">
+					<img th:src="'/img/userProfilePictures/'+ ${user.profilePicture}"
+						alt="Profile Picture" width="65"
+						class="mr-3 rounded-circle img-thumbnail shadow-sm">
+					<div class="media-body">
+						<h4 th:inline="text" class="m-0 text-white">Hello
+							[[${#httpServletRequest.remoteUser}]]!</h4>
+					</div>
+				</div>
+			</div>
+
+			<p
+				class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">
+				Main</p>
+
+			<ul class="nav flex-column bg-dark mb-0">
+
+				<li class="nav-item"><a href="/"
+					class="nav-link text-white font-italic bg-dark"><i
+						class="fa fa-th-large mr-3 text-primary fa-fw"></i> Home </a></li>
+
+				<!-- 			area for my profile href selector -->
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a
+					href="/admin/myProfile" class="nav-link text-white font-italic bg-dark"><i
+						class="fa fa-address-card mr-3 text-primary fa-fw"></i> My Profile</a>
+				</li>
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_USER')"><a
+					href="/user/myProfile" class="nav-link text-white font-italic bg-dark"><i
+						class="fa fa-address-card mr-3 text-primary fa-fw"></i> My Profile
+				</a></li>
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_PROVIDER')">
+					<a href="/provider/myProfile"
+					class="nav-link text-white font-italic"><i
+						class="fa fa-address-card mr-3 text-primary fa-fw bg-dark"></i> My Profile
+				</a>
+				</li>
+
+				<!-- 			area for my bookings href selector -->
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a
+					href="/admin/myBookings" class="nav-link text-white font-italic bg-dark"><i
+						class="fas fa-book mr-3 text-primary fa-fw"></i> My Bookings</a></li>
+
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_USER')"><a
+					href="/user/myBookings" class="nav-link text-white font-italic bg-dark"><i
+						class="fas fa-book mr-3 text-primary fa-fw"></i> My Bookings </a></li>
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_PROVIDER')">
+					<a href="/provider/myBookings"
+					class="nav-link text-white font-italic bg-dark"><i
+						class="fas fa-book mr-3 text-primary fa-fw"></i> My Bookings </a>
+				</li>
+
+				<!-- area for my ratings href selector -->
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a
+					href="/admin/myRatings" class="nav-link text-white font-italic bg-dark"><i
+						class="fa fa-star-half mr-3 text-primary fa-fw"></i> My Ratings</a></li>
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_USER')"><a
+					href="/user/myRatings" class="nav-link text-white font-italic bg-dark"><i
+						class="fa fa-star-half mr-3 text-primary fa-fw"></i> My Ratings </a></li>
+
+				<li class="nav-item" sec:authorize="hasRole('ROLE_PROVIDER')">
+					<a href="/provider/myRatings"
+					class="nav-link text-white font-italic bg-dark"><i
+						class="fa fa-star-half mr-3 text-primary fa-fw"></i> My Ratings </a>
+				</li>
+
+				<!-- area for logout-->
+
+				<li class="nav-item"><a th:href="@{/logout}"
+					class="nav-link text-white font-italic bg-dark"><i
+						class="far fa-times-circle mr-3 text-primary fa-fw"></i> Logout </a></li>
+
+			</ul>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<p
+					class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Administrative</p>
+
+				<ul class="nav flex-column bg-dark mb-0">
+					<li class="nav-item"><a href="/admin/manageUsers"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-users mr-3 text-primary fa-fw"></i> Manage Users
+					</a></li>
+					<li class="nav-item"><a href="/admin/manageDestinations"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-map mr-3 text-primary fa-fw"></i>Manage Destinations
+					</a></li>
+					<li class="nav-item"><a href="/admin/manageBookings"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-book mr-3 text-primary fa-fw"></i>Manage Bookings
+					</a></li>
+					<li class="nav-item"><a href="/admin/manageActivities"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-bicycle mr-3 text-primary fa-fw"></i>Manage
+							Activities
+					</a></li>
+					<li class="nav-item"><a href="/admin/manageRatings"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-star mr-3 text-primary fa-fw"></i>Manage Ratings
+					</a></li>
+					<li class="nav-item"><a
+						href="/admin/manageActivityAvailabilities"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-check-circle mr-3 text-primary fa-fw"></i>Manage
+							Activity Availabilities
+					</a></li>
+					<li class="nav-item"><a href="/admin/manageHotels"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-home mr-3 text-primary fa-fw"></i>Manage Hotels
+					</a></li>
+					<li class="nav-item"><a href="/admin/activityRequests"
+						class="nav-link text-white font-italic bg-dark"> <i
+							class="fa fa-comment mr-3 text-primary fa-fw"></i>Activity
+							Requests
+					</a></li>
+				</ul>
+			</div>
+
+
+			<!-- Provider options -->
+
+			<div sec:authorize="hasRole('ROLE_PROVIDER')">
+				<p
+					class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Provider
+					Options</p>
+
+				<ul class="nav flex-column bg-dark mb-0">
+					<li class="nav-item"><a href="/provider/myActivities"
+						class="nav-link text-white font-italic bg-dark"> 
+						<i class="fa fa-bicycle mr-3 text-primary fa-fw"></i>
+						My Activities </a></li>
+					<li class="nav-item"><a href="/provider/createActivity"
+						class="nav-link text-white font-italic"> 
+						<i class="fa fa-plus-square mr-3 text-primary fa-fw"></i>
+						Add Activities </a></li>
+					<li class="nav-item"><a
+						href="/provider/createAvailableActivity"
+						class="nav-link text-white font-italic bg-dark"> 
+						<i class="fa fa-plus-square mr-3 text-primary fa-fw"></i>
+						Add Available Activities </a></li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- End vertical navbar -->
+	</header>
+</body>
+</html>

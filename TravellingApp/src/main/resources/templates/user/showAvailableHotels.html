@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Hotels</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css"
+	href="static/css/showDestinations.css"
+	th:href="@{/css/showDestinations.css}">
+<link rel="stylesheet" type="text/css" href="static/css/footer.css"
+	th:href="@{/css/footer.css}">
+</head>
+<body>
+	<nav th:insert="fragments/topnav :: topnav"></nav>
+
+
+	<form action="#" method="post" th:action="@{/user/showDestinations}"
+		th:object="${selection}" class="findForm form-2">
+
+		<input type="hidden" id="continentplaceu" name="continent"
+			value="null"> <input type="hidden" id="countryplaceu"
+			name="country" value="null"> <input type="hidden"
+			id="cityplaceu" name="city" value="null"> <input
+			type="hidden" id="sortDir" name="sortDir" value="des"> <input
+			type="hidden" id="sortField" name="sortField" value="city"> <input
+			type="hidden" id="personCount" name="personCount"
+			th:value="${pCount}"> <input type="hidden" id="dateFrom"
+			name="dateFrom" th:value="${dateF}"> <input type="hidden"
+			id="vacationLength" name="vacationLength" th:value="${vacationL}">
+		<p class="display-4">Available Hotels</p>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<input class="btn col-md-4 backToSearch" type="submit"
+				value="Go Back!">
+		</div>
+	</form>
+
+	<div class="card-body mainContainerFlex">
+		<div class="mainContainer">
+			<table class="table table-striped table-responsive-md topTable">
+				<thead>
+					<tr>
+						<th style="width: 33%">Hotel name</th>
+						<th style="width: 33%">Hotel Price</th>
+						<th style="width: 33%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<div th:switch="${hotels.size()}">
+						<div class="col-md-12">
+							<div th:case="0">
+								<p class="display-4">
+									Sorry but we could not found any available hotels :(<br>
+									Click <a th:href="@{/user/findDestination}" id="backToSearch">HERE</a>
+									to get back to the search
+								</p>
+							</div>
+
+							<div th:case="*">
+								<div class="card-body mainContainerFlex"
+									th:each="hotel,iter : ${hotels}">
+									<div class="mainContainer">
+										<table class="table table-striped table-responsive-md">
+											<thead>
+												<tr>
+													<th style="width: 33%">Hotel name</th>
+													<th style="width: 33%">Hotel Price</th>
+													<th style="width: 33%"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td th:text="${hotel.name}"></td>
+													<td th:text="${hotel.price}"></td>
+													<td><a
+														th:href="@{/user/createBooking/{destinationId}
+														/{personCount}/{dateFrom}/{vacationLength}/{hotelid}
+														(destinationId=${hotel.destinationId},
+														personCount=${pCount},
+														dateFrom=${dateF},
+														vacationLength=${vacationL},
+														hotelid=${hotel.hotelId})}"
+														class="btn btn-primary"> Book now!!<i
+															class="fa fa-check ml-2" style="color: white;"></i>
+													</a></td>
+												</tr>
+											</tbody>
+										</table>
+
+
+										<p class="expandButtons">
+											<a class="btn btn-primary" data-toggle="collapse"
+												th:href="'#collapseWeather'+${iter.index}" role="button"
+												aria-expanded="false"
+												th:aria-controls="'collapseWeather'+${iter.index}">
+												Hotel Information</a>
+
+										</p>
+
+										<div class="collapse" th:id="'collapseWeather'+${iter.index}">
+											<div class="card card-body">
+												<div class="card-deck">
+													<div class="card">
+														<svg class="bd-placeholder-img card-img-top" width="100%"
+															height="200" xmlns="http://www.w3.org/2000/svg"
+															aria-label="Placeholder: Image cap"
+															preserveAspectRatio="xMidYMid slice" role="img">
+													<title>Hotel Picture Placeholder</title><rect width="100%" height="100%"
+																fill="#868e96" />
+													<text x="50%" y="50%" fill="#dee2e6" dy=".3em">Hotel Picture Placeholder</text></svg>
+
+														<div class="card-body">
+															<h5 class="card-title">Hotel Description</h5>
+															<p class="card-text">[[${hotel.description}]]</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

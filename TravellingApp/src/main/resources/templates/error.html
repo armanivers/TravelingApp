@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- FRAMEWORK BOOTSTRAP-->
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<meta charset="ISO-8859-1">
+
+
+<link rel="stylesheet" type="text/css" href="static/css/error.css"
+	th:href="@{/css/error.css}">
+
+<link rel="stylesheet" type="text/css" href="static/css/footer.css"
+	th:href="@{/css/footer.css}">
+
+<title>Error Page!</title>
+</head>
+<body>
+
+	<nav th:insert="fragments/topnav :: topnav"></nav>
+	<main>
+		<h1 id="error">404</h1>
+		<p class="display-4" id="notFound">Page not found
+		<p>
+			Please try one of the following pages:<br>
+		<ul id="pages">
+			<li id="homepage"><a href="/"><strong>HOMEPAGE</strong></a></li>
+		</ul>
+		</p>
+	</main>
+
+	<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>
+
+

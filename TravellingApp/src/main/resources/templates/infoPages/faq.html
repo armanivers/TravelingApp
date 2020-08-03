@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <title>FAQ</title>
+    <meta charset="utf-8">
+    <!-- FRAMEWORK BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <!-- css-->
+    <link rel="stylesheet" type="text/css" href="static/css/staticPages.css" th:href="@{/css/staticPages.css}">
+    
+    <link rel = "stylesheet" type = "text/css" href = "static/css/footer.css" 
+	th:href="@{/css/footer.css}">
+	
+	
+</head>
+<body>
+	<nav th:insert="./fragments/topnav :: topnav"></nav>
+	<main>
+	<div id = "top">
+    <p class="display-4" id = "faq">FAQ
+        <svg id = "icon" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="black" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M5.25 6.033h1.32c0-.781.458-1.384 1.36-1.384.685 0 1.313.343 1.313 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.007.463h1.307v-.355c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.562 5.516c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+          </svg>
+    </p>
+    </div>
+    <div id = "sidePage">
+	<div id = "faqdiv">
+        <details>
+            <summary id = "infoPage">How can I create a new account?</summary>
+            <p id = "infoPage">You can get a new Account, just click <a href = "/register"> here </a>and follow the instructions.</p>
+        </details>
+
+        <details>
+            <summary id = "infoPage">How can I cancel my booking?</summary>
+            <p id = "infoPage">You can cancel your booking two weeks before the trip starts.<br>
+                To do this, you must send a written application to DEAP, and then you get a confirmation from us.
+            </p>
+        </details>
+
+
+        <details>
+            <summary id = "infoPage">Will I get a confirmation to my book?</summary>
+            <p id = "infoPage">Yes, you will receive a confirmation email from us, with all the important information about the booking, invoice and travel dates.</p>
+        </details>
+
+        <details>
+            <summary id = "infoPage">With which payment methods can I pay?</summary>
+            <p id = "infoPage">You can pay with:
+                <ol>
+                    <li id = "infoPage">PayPal</li>
+                    <li id = "infoPage">credit card (Mastercard and Visa)</li>
+                    <li id = "infoPage">Amazon Payments</li>
+                    <li id = "infoPage">payment in installments powered by Amazon</li>
+                </ol>
+            </p>
+        </details>
+
+
+        <details>
+            <summary id = "infoPage">How do I find the ideal hotel for me?</summary>
+
+            <p id = "infoPage">Just use our <a href = "/user/findDestination">filter-action,</a> choose your wishes, your asking price and your criteria.<br>
+        </details>
+
+        <details>
+            <summary id = "infoPage">You get vouchers as a gift?</summary>
+            <p id = "infoPage">Yes, you can get vouchers. But the voucher must be worth 200 euros.</p>
+        </details>
+        </div>
+    </div>
+      </main>
+    <footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

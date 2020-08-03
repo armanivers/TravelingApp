@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<body>
+	 <footer th:fragment = "footer" id="footerRahmen"> 
+			<div id = "company">
+				<h1 id = "ueberschrift"><strong>COMPANY</strong></h1>
+			    <a id = "unterpunkte" href = "/aboutUs">About Us</a><br>
+				<a id = "unterpunkte" href = "/contactUs">Contact Us</a><br>
+				<a id = "unterpunkte" href = "/news">News</a><br>
+				<a id = "unterpunkte" href = "/jobs">Jobs</a><br>
+			</div>
+			<div id = "LearnMore">
+				<h1 id = "ueberschrift"><strong>LEARN MORE</strong></h1>
+				<a id = "unterpunkte" href = "/support">Support</a><br>
+				<a id = "unterpunkte" href = "/faq">FAQ</a><br>
+				<a id = "logoFooter" href = "/"><img src = "img/logo.png" th:src="@{/img/logo.png}" width = "230px" height = "100px" alt = "Logo"></a>
+				<p id = "copyright"><small>©DEAP</small></p>
+			</div>
+			<div id = "SM">
+				<h1 id = "ueberschrift"><strong>FOLLOW US ON</strong></h1>
+				<p>
+				<img src = "static/img/socialMediaIcons/instragram.png" th:src="@{/img/socialMediaIcons/instagram.png}" width = "25px" height = "25px">&nbsp; <a id = "unterpunkte" href = "https://www.instagram.com" >Instagram</a><br>
+				</p>
+				<p>
+				<img src = "static/img/socialMediaIcons/facebook.png" th:src="@{/img/socialMediaIcons/facebook.png}" width = "25px" height = "25px">&nbsp; <a id = "unterpunkte" href = "https://de-de.facebook.com">Facebook</a><br>
+				</p>
+				<p>
+				<img src = "static/img/socialMediaIcons/twitter.png" th:src="@{/img/socialMediaIcons/twitter.png}" width = "25px" height = "25px">&nbsp; <a id = "unterpunkte" href = "https://twitter.com/explore">Twitter</a><br>
+				</p>
+				<p>
+				<img src = "static/img/socialMediaIcons/linkedin.png" th:src="@{/img/socialMediaIcons/linkedin.png}" width = "25px" height = "25px">&nbsp; <a id = "unterpunkte" href = "https://de.linkedin.com">LinkedIn</a><br>
+				</p>
+				<p>
+				<img src = "static/img/socialMediaIcons/youtube.png" th:src="@{/img/socialMediaIcons/youtube.png}" width = "25px" height = "25px">&nbsp; <a id = "unterpunkte" href = "https://www.youtube.com">YouTube</a><br>
+				</p>
+			</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css"
+	th:href="@{/css/profile.css}">
+<title>Add Avail. Activity</title>
+</head>
+<body>
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+
+
+		<div class="container my-2">
+			<p class="display-4">Add Available Activity</p>
+			<div class="card">
+				<div class="card-body">
+					<div class="col-md-10">
+						<form action="#" th:action="@{/provider/createAvailableActivity}" th:object="${activityAvailable}"
+							method="post">
+							<div class="row">
+	
+								<div class="form-group col-md-8">
+								<label for="activity" class="col-form-label"><strong>Activity</strong></label>
+									<select class="form-control" 
+										id="activity" th:field="*{temp_activityid}">
+										<option th:each="activity : ${activities}"
+											th:value="${activity.activityId}" th:text="${activity.name}"></option>
+									</select>
+								</div>
+	
+								<div class="form-group col-md-8">
+									<label for="st" class="col-form-label"><strong>Start Time
+											Link</strong></label> <input type="time" name="st"
+										class="form-control" id="st"
+										placeholder="Input a Start Time" />
+								</div>
+	
+								<div class="form-group col-md-8">
+									<label for="et" class="col-form-label"><strong>End Time
+											Link</strong></label> <input type="time"
+										class="form-control" id="et" name="et"
+										placeholder="Input an End Time" />
+								</div>
+								
+								<div class="form-group col-md-8">
+									<label for="date" class="col-form-label"><strong>Date
+											</strong></label> <input type="date" th:field="*{date}"
+										class="form-control" id="date"
+										placeholder="Input a Date" />
+								</div>
+								
+								<div class="form-group col-md-8">
+									<label for="slots" class="col-form-label"><strong>Max Slots</strong></label> <input
+										type="number" th:field="*{maxSlots}" class="form-control"
+										id="slots" placeholder="Input max Slots" />
+								</div>
+	
+								<div class="col-md-6">
+									<input type="submit" class="btn btn-primary" value=" Submit ">
+								</div>
+	
+								<input type="hidden" id="activityAvailableId"  th:value="*{activityAvailableId}">
+	
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+					
+	</div>
+
+	<script type="text/javascript" src="static/js/sidebar.js"
+		th:src="@{/js/sidebar.js}"></script>
+</body>
+</html>

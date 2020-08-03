@@ -1,0 +1,33 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql5-1723285ed86-126772b7883d7751": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - travelingapp",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "latenitearii.ddns.net",
+				"port": "3306",
+				"database": "travelingapp",
+				"url": "jdbc:mysql://latenitearii.ddns.net:3306/travelingapp",
+				"home": "MySQL Binaries",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}

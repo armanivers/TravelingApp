@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Register-Page</title>
+
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/login.css"
+	th:href="@{/css/login.css}">
+
+</head>
+<body>
+	<nav th:insert="fragments/topnav :: topnav"></nav>
+	<div class="modal-dialog text-center">
+		<div class="col-sm-8 main-section">
+			<div class="modal-content">
+				<div class="col-12 user-img">
+					<img src="static/img/user.png" th:src="@{/img/user.png}" />
+				</div>
+				<form class="col-12" action="#" th:action="@{/register}"
+					th:object="${user}" method="post">
+					<div class="form-group" id="user-group">
+						<input type="text" class="form-control" placeholder="username"
+							name="username" />
+					</div>
+					<div class="form-group" id="email-group">
+						<input type="text" class="form-control" placeholder="email"
+							name="email" />
+					</div>
+					<div class="form-group" id="password-group">
+						<input type="password" class="form-control" placeholder="password"
+							name="password" />
+					</div>
+					<div class="form-group" id="password-group">
+						<input type="password" class="form-control"
+							placeholder="confirm Password" name="confirmPassword" />
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-sign-in-alt"></i> Register
+					</button>
+				</form>
+				<div class="col-12 forgot">
+					<a th:href="@{/login}">Already registered? Login!</a>
+				</div>
+				<div class="col-12 forgot">
+                    <a href="/forgot-password">Forgot password?</a>
+                </div>
+				<span th:if="${message == true}">
+					<div th:if="${textMessage == true}" class="alert alert-success">Account
+						has been sucessfully created!</div>
+					<div th:if="${textMessage == false}" class="alert alert-danger">Oops
+						something went wrong! Please try again.</div>
+				</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

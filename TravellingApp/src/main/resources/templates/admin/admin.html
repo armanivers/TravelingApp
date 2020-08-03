@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>My Profile</title>
+
+<!--JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- Fontawesome (Icons) -->
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css" th:href="@{/css/profile.css}">
+
+</head>
+<body>
+	
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+
+		<!-- Here comes page content -->
+		
+
+	</div>
+
+<script type="text/javascript" src="static/js/sidebar.js" th:src="@{/js/sidebar.js}"></script>
+</body>
+</html>

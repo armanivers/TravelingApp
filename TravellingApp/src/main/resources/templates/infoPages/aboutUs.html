@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>About Us</title>
+    <meta charset="utf-8">
+    <!-- FRAMEWORK BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <!-- css-->
+    <link rel="stylesheet" type="text/css" href="static/css/staticPages.css" th:href="@{/css/staticPages.css}">
+    
+    <link rel = "stylesheet" type = "text/css" href = "static/css/footer.css" 
+	th:href="@{/css/footer.css}">
+	
+	
+</head>
+<body>
+	<nav th:insert="./fragments/topnav :: topnav"></nav>
+	<main>
+    <p class="display-4" id = "aboutUs">About Us
+        <svg id = "icon" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="black" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+            <circle cx="8" cy="4.5" r="1"/>
+          </svg>
+      </p>
+    <div id = "sidePage">
+        <p id = "infoPage">During the development of this website our main focus was to keep everything simple as possible.<br>
+            The customer can easily search and book a travel which can be extended with several activities.<br>
+            We want that our customer can enjoy their vocation and have some exiting activities.<br>
+            What sets us apart from the other booking portals is that we offer customers their vacation<br>
+            is directly associated with activities and they don't just catch sunburn on the beach.<br>
+            A vacation should be to relax, but it should not just pass on the beach but<br>
+            one should have exciting activities such as quad biking in the desert, diving in the Pacific<br>
+            or skydiving in Dubai<br>
+            So later you have exciting experiences to tell than usual holiday stories.<br>
+            Furthermore, we ensure that our customers' holiday wishes and criteria are so cheap<br>
+            can meet as possible.<br>
+        </p>
+    </div>
+    </main>
+    <footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

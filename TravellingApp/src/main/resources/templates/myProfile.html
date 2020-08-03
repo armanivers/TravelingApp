@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css"
+	th:href="@{/css/profile.css}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<title>My Profile</title>
+</head>
+<body>
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+
+		<div class="container my-2">
+			<p class="display-4">My profile information</p>
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<p class="myProfileInfo col-md-1">Name:</p>
+						<p class="col-md-4">[[${user.username}]]</p>
+					</div>
+					<div class="row">
+						<p class="myProfileInfo col-md-1">Email:</p>
+						<p class="col-md-4">[[${user.email}]]</p>
+					</div>
+					<hr>
+					<form action="#" th:action="@{/changePassword}" th:object="${user}"
+						method="post" id="form">
+						<div class="row changePasswordContainer">
+							<label for="password" class="col-md-2">New Password</label> <input
+								type="password" id="password" name="password" size="1"
+								class="changePasswordField col-md-2"></input>
+						</div>
+						<div class="row changePasswordContainer">
+							<label for="passwordConfirm" class="col-md-2">Confirm
+								Password</label> <input type="password" id="passwordConfirm"
+								name="passwordConfirm" size="1"
+								class="changePasswordField col-md-2"></input>
+						</div>
+						<br> <input type="hidden" id="userid" name="userid"
+							th:value="*{id}"> <input class="btn changePasswordBtn"
+							type="submit" value="Change Password">
+					</form>
+					<hr>
+					<form action="#" th:action="@{/changeProfilePicture}" method="post"
+						id="form" enctype="multipart/form-data">
+
+						<div class="row changePasswordContainer">
+							<label for="profilePicture" class="col-md-2">Upload File</label>
+							<input type="file" id="profilePicture" name="profilePicture">
+						</div>
+						<br> <input type="hidden" name="userid"
+							th:value="${user.id}"> <input
+							class="btn changePasswordBtn" type="submit"
+							value="Upload Profile Picture">
+					</form>
+
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="popup" th:value="${showMessage}"></div>
+	<div id="popupReturn" th:value="${success}"></div>
+
+	<script type="text/javascript" src="static/js/sidebar.js"
+		th:src="@{/js/sidebar.js}"></script>
+	<script>
+	//check if user really wants to change his password?
+// 	document.getElementById("form").addEventListener("submit",
+// 			Swal.fire({
+// 				  title: 'Are you sure?',
+// 				  text: "You won't be able to revert this!",
+// 				  icon: 'warning',
+// 				  showCancelButton: true,
+// 				  confirmButtonColor: '#3085d6',
+// 				  cancelButtonColor: '#d33',
+// 				  confirmButtonText: 'Yes, delete it!'
+// 				}).then((result) => {
+// 				  if (result.value) {
+// 				    Swal.fire(
+// 				      'Deleted!',
+// 				      'Your file has been deleted.',
+// 				      'success'
+// 				    )
+// 				  }
+// 				})
+// 	);
+	
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top-end',
+			  showConfirmButton: false,
+			  timer: 3000,
+			  timerProgressBar: true,
+			  onOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
+			})
+			const element = document.getElementById("popup");
+			const elementReturn = document.getElementById("popupReturn");
+			console.log(element.attributes[1].value)
+			console.log(elementReturn.attributes[1].value)
+		if(element.attributes[1].value == "true"){
+			
+			if(elementReturn.attributes[1].value === "passTrue"){
+				window.onload =  Toast.fire({
+					  icon: 'success',
+					  title: 'Password changed Successfully'
+					})
+			}else if(elementReturn.attributes[1].value === "passFalse"){
+				window.onload =  Toast.fire({
+					  icon: 'error',
+					  title: 'Passwords do not match'
+					})
+			}else if(elementReturn.attributes[1].value === "picTrue"){
+				window.onload =  Toast.fire({
+					  icon: 'success',
+					  title: 'Picture updated!'
+					})
+			
+		}else if(elementReturn.attributes[1].value === "picFalse"){
+				window.onload =  Toast.fire({
+					  icon: 'error',
+					  title: 'Error updating your picture :( no picture uploaded?'
+					})
+		}
+		}
+			</script>
+</body>
+</html>

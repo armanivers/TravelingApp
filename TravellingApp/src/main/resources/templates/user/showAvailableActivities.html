@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Available activities</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- css-->
+<link rel="stylesheet" type="text/css"
+	href="static/css/showDestinations.css"
+	th:href="@{/css/showDestinations.css}">
+<link rel="stylesheet" type="text/css" href="static/css/activity.css"
+	th:href="@{/css/activity.css}">
+
+<!-- video modal popup -->
+<link rel="stylesheet" type="text/css" href="static/css/videoPopup.css"
+	th:href="@{/css/videoPopup.css}">
+<script src="static/js/videopopup.js" th:src="@{/js/videopopup.js}"></script>
+<link rel="stylesheet" type="text/css" href="static/css/footer.css"
+	th:href="@{/css/footer.css}">
+
+</head>
+<body>
+	<nav th:insert="fragments/topnav :: topnav"></nav>
+	<div class="containerFlex">
+		<div class="mainContainer">
+			<div th:switch="${activitiesAvailable.size()}">
+
+				<div th:case="0">
+					<h1>No Activities found :((</h1>
+				</div>
+
+				<div th:case="*">
+					<p class="display-4">Available activities</p>
+
+					<!-- Price Range Selector -->
+					<div class="priceFilterContainer">
+						<div class="priceFilter">
+							<div>
+								<label for="minPrice">Minimum Price</label> <input type="number"
+									id="minPrice" min="0" max="150" value=0>
+							</div>
+							<div>
+								<label for="maxPrice">Maximum Price</label> <input type="number"
+									id="maxPrice" min="0" max="150" value=100>
+							</div>
+							<div>
+								<label for="activityGenre">Activity Genre</label> <input
+									type="text" id="activityGenre">
+							</div>
+						</div>
+					</div>
+					<!-- Price Range Selector -->
+
+					<div th:each="activity : ${activitiesAvailable}">
+						<div class="container">
+							<input type="hidden" th:value="${activity.price}">
+							<div class="mainContainer">
+								<div id="activityContainer">
+									<p>
+										<i class="activityInfoWord">Activity Name:</i>
+										[[${activity.name}]]
+									</p>
+									<p>
+										<i class="activityInfoWord">Activity Description:</i>
+										[[${activity.description}]]
+									</p>
+									<p>
+										<i class="activityInfoWord">Activity Price:</i>
+										[[${activity.price}]]
+									</p>
+									<p>
+										<i class="activityInfoWord">Activity Difficulty:</i>
+										[[${activity.difficulty}]]
+									</p>
+									<p class="video btn btn-primary activityOptionBtn"
+										th:video-url="${activity.videoLink}">Activity Preview</p>
+									<p>Show me available Activities</p>
+									<a
+										th:href="@{/user/displayActivity/{bookingId}/{activityId}(activityId=${activity.activityId},bookingId=${bookingId})}"
+										class="btn btn-primary activityOptionBtn"> Show me MOORE<i
+										class="fa fa-flag-checkered ml-2"></i></a>
+								</div>
+								<div id="ratingContainer">
+									<span class="heading">User Rating
+										[[${activity.getRatingsMedian()}]]</span>
+									<div th:id="'rating'+${activity.activityId}">
+										<script th:inline="javascript">
+											function calcStars(var1, var2){
+												var x = document.getElementById(var1);
+												
+												let diff = 5-Math.floor(var2);
+												console.log(diff);
+												for(let i = 1 ; i <= var2 ; i++){
+													x.innerHTML += '<span class="fa fa-star checked"></span>';
+												}
+												for(let i = 1 ; i <= diff ; i++){
+													x.innerHTML += '<span class="fa fa-star"></span>';
+												}
+								
+											}
+											calcStars("rating"+/*[[${activity.activityId}]]*/,/*[[${activity.getRatingsMedian()}]]*/);
+
+										</script>
+
+									</div>
+									<p>[[${activity.getRatingsMedian()}]] average based on
+										[[${activity.ratings.size()}]] reviews.</p>
+								</div>
+								<hr style="border: 3px solid rgb(30, 144, 255)">
+							</div>
+						</div>
+						<!-- border was here before -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<footer th:insert="fragments/footer :: footer"></footer>
+	<script src="static/js/activitiesScript.js"
+		th:src="@{/js/activitiesScript.js}"></script>
+</body>

@@ -1,0 +1,136 @@
+
+
+ul li
+{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+
+
+
+
+body
+{
+    background-image: url("/img/background.jpg");
+    min-height: 100%;
+}
+
+
+
+
+aside
+{
+    justify-content: space-evenly;
+}
+
+
+main
+{
+    flex: 1 80%;
+}
+
+h1
+{
+    clear: left;
+}
+
+p, a
+{
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration-line: none;
+    color: black;
+}
+
+
+
+aside
+{
+    justify-content: space-evenly;
+}
+
+
+
+#navigation
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1 20%;
+    height: 400px;
+    float: left;
+    background: rgb(168, 166, 166);
+    background: rgba(180, 236, 238, 0.5);
+    border: 1px solid;
+    border-radius: 5px;
+    height: 400px;
+    float: left;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+input 
+{
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+main
+{
+    flex: 1 80%;
+}
+
+h1
+{
+    clear: left;
+}
+
+p, a
+{
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration-line: none;
+    color: black;
+}
+
+
+#navigation
+{
+    background: rgb(168, 166, 166);
+    background: rgba(180, 236, 238, 0.5);
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+
+
+body::after
+{
+    content: footer;
+}
+
+nav a 
+{
+    border: 1px solid;
+    padding: 5px;
+    margin-right: 5px;
+    background: linear-gradient(to bottom right, rgba(180, 236, 238, 0.5), rgb(196, 195, 195));
+}
+
+#logout
+{
+    border: 1px solid;
+}
+
+#logout p
+{
+    text-align: center;
+    background: linear-gradient(to bottom right, rgba(180, 236, 238, 0.5), rgb(196, 195, 195));
+}
+
+#logout a
+{
+    border: 1px solid;
+    background: linear-gradient(to bottom right, rgba(180, 236, 238, 0.5), rgb(196, 195, 195));
+}
+
+

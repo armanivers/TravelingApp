@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css" th:href="@{/css/profile.css}">
+<title>Show Activity Availabilities</title>
+</head>
+<body>	
+<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+	
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+	
+	<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+	
+	
+	<div class="container my-2">
+		<p class="display-4">Manage Activity Availabilities</p>
+        <div th:switch="${activitiesAvailabilities}" class="container my-5">
+            <div class="col-md-10">
+		<div th:case="*">
+			<table class="table table-striped table-responsive-md manage-table">
+				<thead>
+					<tr>
+						<th>Activity Availability ID</th>
+						<th>Booked by </th>
+						<th>Activity</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Slots</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="avail : ${activitiesAvailabilities}" class="manage-table-row">
+						<td th:text="${avail.activityAvailableId}"></td>
+						<td th:text="${avail.bookingActivities.size()}"></td>
+						<td th:text="${avail.activity.name}"></td>
+						<td th:text="${avail.getStartTimeString()}"></td>
+						<td th:text="${avail.getEndTimeString()}"></td>
+						<td th:text="${avail.slots}"></td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+        </div>
+    </div>
+    </div>
+    </div>
+<script type="text/javascript" src="static/js/sidebar.js" th:src="@{/js/sidebar.js}"></script>
+</body>
+</html>

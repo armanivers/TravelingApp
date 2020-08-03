@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script
+	src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css"
+	th:href="@{/css/profile.css}">
+<title>My Ratings</title>
+</head>
+<body>
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+
+		<div th:switch="${userRatings.size()}">
+			<div th:case="0">
+				<p class="display-4">You haven't rated anything yet? Rate some
+					stuff please!</p>
+			</div>
+			<div th:case="*">
+				<p class="h2">Your Ratings</p>
+				<div class="info-box">
+					<div th:each="rating : ${userRatings}" class="card my-card"
+						style="width: 17rem;">
+						<div class="card-header my-card-header">
+							<svg width="3em" height="3em" viewBox="0 0 16 16"
+								class="bi bi-star-fill" fill="white"
+								xmlns="http://www.w3.org/2000/svg">
+  								<path
+									d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+							</svg>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item my-list-group-items">
+								<p>Rated: [[${rating.rating}]]/5</p>
+							</li>
+							<li class="list-group-item my-list-group-items">
+								<p>" [[${rating.comment}]] "</p>
+							</li>
+							<li class="list-group-item my-list-group-items">
+								<p>Date: [[${rating.ratingDate}]]</p>
+							</li>
+							<li class="list-group-item my-list-group-items">
+								<p>Picture Name:  [[${rating.pictureName}]]</p>
+							</li>
+
+<!-- 							<div th:if="#{rating.getPictureName() != ''}">  -->
+							
+<!-- 							<li class="list-group-item my-list-group-items"> -->
+<!-- 							<div style="display: none;" id="animatedModal" class="animated-modal"> -->
+<!-- 							<a th:href="'/img/ratingPictures/'+ ${rating.getPictureName()}">Click me</a> -->
+<!-- 							</div> -->
+<!-- 							</li> -->
+							
+<!-- 					    	</div> -->
+					    	
+<!-- 					    	<div th:if="#{rating.getPictureName() == ''}"> -->
+<!-- 					    	<li class="list-group-item my-list-group-items"> -->
+<!-- 								<p>You didn't upload a picture!</p> -->
+<!-- 								<a th:href="'/img/ratingPictures/'+ ${rating.getPictureName()}">Click me</a> -->
+<!-- 							</li> -->
+							
+<!-- 					    	</div> -->
+							
+							<li class="list-group-item my-list-group-items"><a
+								th:href="@{/user/rating/select/{ratingId}
+	 				    	(ratingId=${rating.getRatingId()})}">
+									Update/Edit My Rating</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript" src="static/js/sidebar.js"
+		th:src="@{/js/sidebar.js}"></script>
+
+</body>
+</html>

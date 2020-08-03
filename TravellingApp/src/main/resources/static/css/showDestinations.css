@@ -1,0 +1,112 @@
+/* --------------Weather Information--------------*/
+.header {
+	margin: 0;
+    padding: .3rem;
+    background-color: rgb(169,169,163);
+    font: 1rem 'Fira Sans', sans-serif;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+
+.forecast {
+    margin: 0;
+    padding: .3rem;
+    background-color: rgb(169,169,163);
+    font: 1rem 'Fira Sans', sans-serif;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.forecast > h1,
+.day-forecast {
+    margin: .5rem;
+    padding: .3rem;
+    font-size: 1.2rem;
+    background-color: rgb(30,144,255);
+    border-radius: 3px;
+}
+
+.day-forecast > h2,
+.day-forecast > p {
+    margin: .2rem;
+    font-size: 1rem;
+}
+
+/* --------------Weather Information--------------*/
+
+.highlight{
+	border: 1px solid rgb(240,240,240);
+	background: rgba(255,0,0,0.5);
+}
+
+.sortable:hover {
+	background: red;
+	color: white;
+}
+
+
+.expandButtons{
+	display: inline;
+/*  maybe put the buttons to the right instead sticked to the left? */
+/* 	position: relative; */
+/*  left: 150px; */
+
+}
+
+.expandButtons{
+	display: inline;
+/*  maybe put the buttons to the right instead sticked to the left? */
+/* 	position: relative; */
+/*  left: 150px; */
+
+}
+
+.display-4 {
+	color: rgb(30,144,255);
+	text-align: center;
+}
+
+#backToSearch {
+	text-decoration: underline;
+}
+
+.mainContainer {
+	width: 90%;
+}
+
+.mainContainerFlex {
+	display: flex;
+	justify-content: center;
+}
+
+td {
+	background: rgb(169,169,163);
+	color: white;
+	border-bottom: 1px solid rgb(222,226,230);
+}
+
+.backToSearch {
+	color: white;
+	background: #343a40;
+}
+
+.goBackContainer {
+	padding-top: 1em;
+}
+
+#sorting {
+	color: white;
+	background: rgb(30,144,255);
+}
+
+.topTable > thead {
+	background: rgb(30,144,255);
+	color: white;
+}
+
+#title {
+	color: rgb(30,144,255);
+}

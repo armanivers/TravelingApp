@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<head>
+<title>News</title>
+<meta charset="utf-8">
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/staticPages.css"
+	th:href="@{/css/staticPages.css}">
+
+<link rel="stylesheet" type="text/css" href="static/css/footer.css"
+	th:href="@{/css/footer.css}">
+
+
+</head>
+<body>
+	<nav th:insert="./fragments/topnav :: topnav"></nav>
+	<main>
+		<p class="display-4" id="news">
+			News
+			<svg id="icon" width="1em" height="1em" viewBox="0 0 16 16"
+				class="bi bi-newspaper" fill="black"
+				xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+					d="M0 2A1.5 1.5 0 0 1 1.5.5h11A1.5 1.5 0 0 1 14 2v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14V2zm1.5-.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5h-11z" />
+            <path fill-rule="evenodd"
+					d="M15.5 3a.5.5 0 0 1 .5.5V14a1.5 1.5 0 0 1-1.5 1.5h-3v-1h3a.5.5 0 0 0 .5-.5V3.5a.5.5 0 0 1 .5-.5z" />
+            <path
+					d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z" />
+          </svg>
+		</p>
+		<div id="sidePage">
+			<h2>COVID-19</h2>
+			<p id="infoPage">
+				Travel around the world is currently limited due to the coronavirus
+				pandemic<br> Therefore, you should let us check where from,
+				whether traveling and staying overnight in the country you have
+				chosen<br> is possible. If possible, you should familiarize
+				yourself with the security measures<br> <br> <br> <small>*Travel
+					within the Erupaean countries is a little more relaxed and does not
+					have such strict measures.</small><br>
+			</p>
+			<hr>
+			<h2>VAT reduction</h2>
+			<p id="infoPage">
+				Since VAT has been reduced from 19% to 16% at the moment, this also
+				has an impact on our travel prices.<br> You should take a look
+				at our offers, the prices are greatly reduced, you should not miss
+				this.<br>
+			</p>
+		</div>
+	</main>
+	<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

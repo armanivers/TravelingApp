@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Update Rating</title>
+
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- Fontawesome (Icons) -->
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css"
+	th:href="@{/css/profile.css}">
+<link rel="stylesheet" type="text/css" href="static/css/rating.css"
+	th:href="@{/css/rating.css}">
+
+</head>
+<body>
+
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+
+		<div id="container">
+			<div id="formContainer">
+
+				<div class="container my-2">
+					<p class="display-4">Update this activity</p>
+					<div class="card">
+						<div class="card-body">
+							<div class="col-md-10">
+								<form action="#" th:action="@{/user/activity/rate/completed}"
+									th:object="${rating}" method="post"
+									enctype="multipart/form-data">
+									<div class="row">
+
+										<div class="form-group col-md-10">
+											<input type="file" name="file">
+										</div>
+
+										<div class="form-group col-md-10">
+											<div>
+												<label for="comment" class="col-form-label"
+													style="color: rgb(30, 144, 255)"><strong>User
+														Feedback</strong></label>
+												<textarea class="form-control" rows="12" id="comment"
+													placeholder="Your Feedback!" th:field="*{comment}"
+													name="comment"></textarea>
+											</div>
+										</div>
+
+										<div class="form-group col-md-10">
+											<div class="slidecontainer">
+												<input type="range" min="1" max="5" th:value="${rating}"
+													th:field="*{rating}" class="slider" id="rating">
+												<p>
+													Rating: <span id="ratingValue"></span>
+												</p>
+											</div>
+										</div>
+										<input type="hidden" id="ratingDate" th:field="*{ratingDate}">
+										<input type="hidden" id="user" th:field="*{user}"> <input
+											type="hidden" id="activity" th:field="*{activity}"> <input
+											type="hidden" id="ratingId" th:field="*{ratingId}"> <input
+											type="hidden" id="pictureName" th:field="*{pictureName}">
+										<div class="infoContainer">
+											<p class="activityInfoText">
+												Activity Name: <i>[[${rating.activity.name}]]</i>
+											</p>
+											<p class="activityInfoText">
+												Activity Description: <i>[[${rating.activity.description}]]</i>
+											</p>
+											<p class="activityInfoText">
+												Activity Price: <i>[[*{ratingId}]]</i>
+											</p>
+											<p class="activityInfoText">
+												Activity Difficulty: <i>[[${activity.difficulty}]]</i>
+											</p>
+											<p th:video-url="${activity.videoLink}"
+												class="video activityInfoText">Activity Preview</p>
+											<div class="row">
+												<div class="col-md-6">
+													<input type="submit" class="btn btn-primary"
+														style="font-weight: bold" value=" Send your Feedback ">
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="static/js/sidebar.js"
+		th:src="@{/js/sidebar.js}"></script>
+	<script>
+		var slider = document.getElementById("rating");
+		var output = document.getElementById("ratingValue");
+		var rating = document.getElementById("rating");
+		
+		output.innerHTML = countStars(rating.value);
+
+		slider.oninput = function() {
+			switch (this.value) {
+			case "1":
+				output.innerHTML = countStars(1);
+				break
+			case "2":
+				output.innerHTML = countStars(2);
+				break
+			case "3":
+				output.innerHTML = countStars(3);
+				break
+			case "4":
+				output.innerHTML = countStars(4);
+				break
+			case "5":
+				output.innerHTML = countStars(5);
+				break
+			default:
+				output.innerHTML = "kann gar nicht seinnnn";
+				console.log("eeh error??");
+			}
+
+		}
+
+		function countStars(x) {
+			let result = '';
+			for (let i = 0; i < x; i++) {
+				result += "<span class='fa fa-star fa-2x checked'></span>";
+			}
+			console.log(result);
+			return result;
+		}
+	</script>
+</body>
+</html>
+v

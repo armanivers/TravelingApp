@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>My Booking</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css"
+	th:href="@{/css/profile.css}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</head>
+<body>
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i>
+			<small class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+	
+		<p class="display-4">My booking summary</p>
+			<div class="row">
+				<div class="col-md-4 booking-info-item">
+					<div id="timer" th:if="${booking.isUpcoming()}">
+						<p class="h2">Your journey starts in:</p>
+						<div id="clockdiv">
+							<div>
+								<span class="days"></span>
+								<div class="smalltext">Days</div>
+							</div>
+							<div>
+								<span class="hours"></span>
+								<div class="smalltext">Hours</div>
+							</div>
+							<div>
+								<span class="minutes"></span>
+								<div class="smalltext">Minutes</div>
+							</div>
+							<div>
+								<span class="seconds"></span>
+								<div class="smalltext">Seconds</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+			<br>
+			
+		<p class="h2">General booking information</p>
+		<div class="card card-body info-box-booking">
+			<div class="row">
+				<div class="col-md-4 booking-info-item">
+					<svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="rgb(30,144,255)" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+					</svg>
+					<p>Country: [[${booking.destination.country}]]</p>
+				</div>
+				<div class="col-md-4 booking-info-item">
+					<svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-map" fill="rgb(30,144,255)" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M15.817.613A.5.5 0 0 1 16 1v13a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 14.51l-4.902.98A.5.5 0 0 1 0 15V2a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0l4.902.98 4.902-.98a.5.5 0 0 1 .415.103zM10 2.41l-4-.8v11.98l4 .8V2.41zm1 11.98l4-.8V1.61l-4 .8v11.98zm-6-.8V1.61l-4 .8v11.98l4-.8z"/>
+					</svg>
+					<p>City: [[${booking.destination.city}]]</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 booking-info-item">
+					<svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-house-fill" fill="rgb(30,144,255)" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+						<path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+					</svg>
+					<p>Hotel: [[${booking.hotel.name}]]</p>
+				</div>
+				<div class="col-md-4 booking-info-item">
+					<svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-person-check-fill" fill="rgb(30,144,255)" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm9.854-2.854a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+					</svg>
+					<p>Person Count: [[${booking.personCount}]]</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 booking-info-item">
+					<svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-calendar-check-fill" fill="rgb(30,144,255)" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM0 5h16v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5zm10.854 3.854a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+					</svg>
+					<p>Arrival Date: [[${booking.dateFrom}]]</p>
+				</div>
+				<div class="col-md-4 booking-info-item">
+					<svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-calendar2-minus-fill" fill="rgb(30,144,255)" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zm-2 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1zM6 10a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
+					</svg>
+					<p>Departure Date: [[${booking.dateTo}]]</p>
+				</div>
+				<div class="col-md-4 booking-info-item">
+					<svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-calendar2-minus-fill" fill="rgb(30,144,255)" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zm-2 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-1zM6 10a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
+					</svg>
+					<p>Booking Price: [[${booking.getPrice()}]]</p>
+				</div>
+			</div>
+		</div>
+		<br>
+		
+		<div th:switch="${booking.bookingActivities.size()}">
+
+			<div th:case="0">
+				<p class="display-4">Sorry no activities booked.</p>
+				<div th:if="${booking.isUpcoming() or booking.isActive()}">
+					<p class="display-4">
+						Book now!
+						<a th:href="@{/user/showAvailableActivities/{bookingId}(bookingId=${booking.bookingId})}">> Show me some cool activities <</a>
+					</p>
+				</div>
+			</div>
+			
+			<div th:case="*">
+				<p class="h2">Your booked activities</p>
+				<div class="info-box">
+					<div th:each="activity : ${booking.getSortedActivitiesAsc()}" class="card my-card" style="width: 17rem;">
+						<div class="card-header my-card-header">
+							<p>[[${activity.activityAvailable.activity.name}]]</p>
+						</div>
+					  	<ul class="list-group list-group-flush">
+					    	<li class="list-group-item my-list-group-items"><p>Start time: [[${activity.activityAvailable.getStartTimeString()}]]</p></li>
+					    	<li class="list-group-item my-list-group-items"><p>End time: [[${activity.activityAvailable.getEndTimeString()}]]</p></li>
+					    	<li class="list-group-item my-list-group-items"><p>Date: [[${activity.activityAvailable.date}]]</p></li>
+					    	<li class="list-group-item my-list-group-items"> <!-- th:if="${booking.isExpired()}" wird Link nicht angezeigt -->
+					    	
+					    	
+						    
+						    <div th:unless="${user.hasRatedActivity(activity.activityAvailable.activity)}"> 
+					    	<a th:href="@{/user/activity/rate/{activityId}(activityId=${activity.activityAvailable.activity.activityId})}">
+					    	Give us your feedback!</a></div>
+					    	<div th:if="${user.hasRatedActivity(activity.activityAvailable.activity)}">
+					    	<a th:href="@{/user/rating/show/{userid}/{activityid}
+	 				    	(userid=${user.getId()},activityid=${activity.activityAvailable.activity.activityId})}"> 
+					    	Show me my Rating</a></div>
+					    		
+				    	
+</li>
+					  	</ul>
+					  	
+						<!-- Hier kommen aktivitaten falls es welche gibt -->
+					</div>
+				</div>
+				<br>
+			</div>
+			
+		</div>
+		
+		<p class="h2">Options</p>
+		<div class="options-box">			
+			<div th:if="${booking.isUpcoming() or booking.isActive()}">
+			<svg class="bi bi-play-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+			</svg>
+			<a th:href="@{/user/showAvailableActivities/{bookingId}(bookingId=${booking.bookingId})}">Book some more activities now!</a>
+			</div>
+			
+			<svg class="bi bi-play-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+			</svg>
+			<a th:href="@{/user/displayBooking/bookingSummary/{bookingId}(bookingId=${booking.bookingId})}">Generate PDF Report of this booking!</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="static/js/sidebar.js"
+		th:src="@{/js/sidebar.js}"></script>
+	<script th:inline="javascript">
+	function getTimeRemaining(endtime) {
+		  var t = Date.parse(endtime) - Date.parse(new Date());
+		  var seconds = Math.floor((t / 1000) % 60);
+		  var minutes = Math.floor((t / 1000 / 60) % 60);
+		  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+		  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+		  return {
+		    'total': t,
+		    'days': days,
+		    'hours': hours,
+		    'minutes': minutes,
+		    'seconds': seconds
+		  };
+		}
+	
+		function initializeClock(id, endtime) {
+		  var clock = document.getElementById(id);
+		  var daysSpan = clock.querySelector('.days');
+		  var hoursSpan = clock.querySelector('.hours');
+		  var minutesSpan = clock.querySelector('.minutes');
+		  var secondsSpan = clock.querySelector('.seconds');
+	
+		  function updateClock() {
+		    var t = getTimeRemaining(endtime);
+	
+		    daysSpan.innerHTML = t.days;
+		    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+		    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+		    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+	
+		    if (t.total <= 0) {
+		      clearInterval(timeinterval);
+		    }
+		  }
+	
+		  updateClock();
+		  var timeinterval = setInterval(updateClock, 1000);
+		}
+		var val = /*[[${booking.dateFrom}]]*/;
+		console.log(val);
+		var deadline = val;
+		initializeClock('clockdiv', deadline);
+	
+	</script>
+</body>
+</html>

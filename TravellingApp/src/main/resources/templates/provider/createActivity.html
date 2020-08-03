@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add Activity</title>
+
+<!--JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- Fontawesome (Icons) -->
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+<link rel="stylesheet" type="text/css" href="static/css/profile.css" th:href="@{/css/profile.css}">
+
+</head>
+
+<body>
+
+	<!-- sidenav -->
+	<header th:insert="fragments/sidenav :: sidenav"></header>
+
+	<!-- Page content holder -->
+	<div class="page-content p-5" id="content">
+
+		<!-- Toggle button -->
+		<button id="sidebarCollapse" type="button"
+			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+			<i class="fa fa-bars mr-2"></i><small
+				class="text-uppercase font-weight-bold">Toggle</small>
+		</button>
+
+		<div class="container my-2">
+			<p class="display-4">Add Activity</p>
+			<div class="card">
+				<div class="card-body">
+					<div class="col-md-10">
+						<form action="#" th:action="@{/provider/createActivity}"
+							th:object="${activity}" method="post">
+							<div class="row">
+
+								<div class="form-group col-md-8">
+									<label for="name" class="col-form-label"><strong>Activity
+											Name</strong></label> <input type="text" th:field="*{name}"
+										class="form-control" id="name"
+										placeholder="Input activity name" />
+								</div>
+
+								<div class="form-group col-md-8">
+									<label for="destination" class="col-form-label"><strong>Destination</strong></label>
+									<select class="form-control" id="destination"
+										th:field="*{temp_destinationid}">
+										<option th:each="destination : ${destinations}"
+											th:value="${destination.destinationId}"
+											th:text="${destination.city}"></option>
+									</select>
+								</div>
+
+								<div class="form-group col-md-8">
+									<label for="temp_seasonid" class="col-form-label"><strong>Season</strong></label>
+									<select class="form-control" id="temp_seasonid"
+										th:field="*{temp_seasonid}">
+										<option th:each="season : ${seasons}" th:value="${season.id}"
+											th:text="${season.name}"></option>
+									</select>
+								</div>
+
+								<div class="form-group col-md-8">
+									<label for="videoLink" class="col-form-label"><strong>Video
+											Link</strong></label> <input type="text" th:field="*{videoLink}"
+										class="form-control" id="videoLink"
+										placeholder="Input a youtube video link" />
+								</div>
+
+								<div class="form-group col-md-8">
+									<label for="description" class="col-form-label"><strong>Descritpion</strong></label>
+									<input type="text" th:field="*{description}"
+										class="form-control" id="description"
+										placeholder="Input activity Description" />
+								</div>
+
+								<div class="form-group col-md-8">
+									<label for="price" class="col-form-label"><strong>Price</strong></label>
+									<input type="number" th:field="*{price}" class="form-control"
+										id="price" placeholder="Input price" />
+								</div>
+
+								<div class="form-group col-md-8">
+									<div class="slidecontainer">
+										<input type="range" min="0" max="5" value="0"
+											th:field="*{difficulty}" class="slider" id="difficulty">
+										<p>
+											Difficulty: <span id="difficultyValue"></span>
+										</p>
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<input type="submit" class="btn btn-primary" value=" Submit ">
+								</div>
+
+								<input type="hidden" id="provider" name="provider"
+									th:value="${name}">
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var slider = document.getElementById("difficulty");
+		var output = document.getElementById("difficultyValue");
+		output.innerHTML = "sehr sehr leicht";
+
+		slider.oninput = function() {
+			switch (this.value) {
+			case "0":
+				output.innerHTML = "Sehr sehr leicht";
+				break
+			case "1":
+				output.innerHTML = "leicht lul";
+				break
+			case "2":
+				output.innerHTML = "immernoch bissl leicht";
+				break
+			case "3":
+				output.innerHTML = "naja";
+				break
+			case "4":
+				output.innerHTML = "ooh wow";
+				break
+			case "5":
+				output.innerHTML = "oha super schwer";
+				break
+			default:
+				output.innerHTML = "kann gar nicht seinnnn";
+				console.log("eeh error??");
+			}
+
+		}
+	</script>
+	<script type="text/javascript" src="static/js/sidebar.js"
+		th:src="@{/js/sidebar.js}"></script>
+</body>
+
+</html>

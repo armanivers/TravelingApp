@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Travelling App</title>
+
+<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script
+	src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- css-->
+
+<link rel="stylesheet" type="text/css" href="static/css/index.css"
+	th:href="@{/css/index.css}">
+<link rel="stylesheet" type="text/css" href="static/css/footer.css"
+	th:href="@{/css/footer.css}">
+
+<link rel="stylesheet" type="text/css" href="static/css/footer.css"
+	th:href="@{/css/footer.css}">
+
+
+
+</head>
+<body>
+	<nav th:insert="fragments/topnav :: topnav"></nav>
+	<main>
+		<br>
+		<h1 style="color: rgb(30,144,255)">
+			DEAP - Travel even de<small>(a)</small>per than your imagination!
+		</h1>
+		<br>
+		<!-- Slideshow container -->
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active" data-interval="2000">
+					<img src="static/img/slideshowPictures/brazil.png"
+						th:src="@{/img/slideshowPictures/brazil.png}"
+						class="d-block w-100" alt="..."> <a
+						href="/user/findDestination"><button type="button"
+							class="book_button">Book Journey</button></a>
+					<div class="carousel-caption d-none d-md-block">
+						<!--       <div class="textContainer border-0 rounded"> -->
+						<h2 class="titleText">Brazil</h2>
+						<p class="descriptionText">Wonderful brazillian waterfalls.</p>
+						<!--           </div> -->
+					</div>
+				</div>
+				<div class="carousel-item" data-interval="2000">
+					<img src="static/img/slideshowPictures/germany.png"
+						th:src="@{/img/slideshowPictures/germany.png}"
+						class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h3 class="titleText">Berlin</h3>
+						<p class="descriptionText">Wonderful city in Germany.</p>
+					</div>
+					<a href="/user/findDestination"><button type="button"
+							class="book_button">Book Journey</button></a>
+				</div>
+				<div class="carousel-item" data-interval="2000">
+					<img src="static/img/slideshowPictures/england.png"
+						th:src="@{/img/slideshowPictures/england.png}"
+						class="d-block w-100" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h4 class="titleText">United Kingdom</h4>
+						<p class="descriptionText">Wonderful London.</p>
+					</div>
+					<a href="/user/findDestination"><button type="button"
+							class="book_button">Book Journey</button></a>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+
+
+	<br>
+	</main>
+	<section>
+		<h1 style="text-align: center" class="h1Index">
+			Ratings of the Day
+		</h1>
+		<br>
+		<div id="ratingsContainer">
+			<!-- Zuerst Bewertung die ein Bild hat -->
+			<div id="ratingWithPic">
+				<!-- div damit es clickbar ist -->
+				<div class="ratingPicture">
+					<p class="mb-0">
+						<img height="275" width="340" data-fancybox
+							data-animation-duration="700" data-src="#animatedModal"
+							th:src="'/img/ratingPictures/'+ ${withPic.getPictureName()}"
+							alt="Rating picture" />
+					</p>
+
+					<div style="display: none;" id="animatedModal"
+						class="animated-modal">
+						<a> <img
+							th:src="'/img/ratingPictures/'+ ${withPic.getPictureName()}"
+							alt="Rating picture" />
+						</a>
+					</div>
+				</div>
+				<div class="ratingInfo">
+					<!-- infos ueber das rating -->
+					<p style="text-decoration: underline white">[[${withPic.activity.name}]]</p>
+					<p>By [[${withPic.user.username}]]</p>
+					<p>Rated [[${withPic.rating}]]/5</p>
+					<p>" [[${withPic.comment}]] "</p>
+					<p>Rated on: [[${withPic.ratingDate}]]</p>
+				</div>
+			</div>
+			<br>
+			<!-- danach bewertung ohne bild-->
+			<div id="ratingWithoutPic">
+				<div class="ratingInfo">
+					<p style="text-decoration: underline white">[[${withoutPic.activity.name}]]</p>
+					<p>By [[${withoutPic.user.username}]]</p>
+					<p>Rated [[${withoutPic.rating}]]/5</p>
+					<p>" [[${withoutPic.comment}]] "</p>
+					<p>Rated on: [[${withoutPic.ratingDate}]]</p>
+				</div>
+				<div class="ratingPicture">
+					<svg width="7em" height="7em" viewBox="0 0 16 16"
+						class="bi bi-star-fill" fill="white"
+						xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+					</svg>
+				</div>
+			</div>
+		</div>
+		<br>
+
+	</section>
+
+	<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>
